@@ -10,9 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>quarkus-platform-app-parent</artifactId>
-    <name>Quarkus Platform - Application - Parent</name>
-    <description>Parent POM providing dependency and plugin management for Quarkus Platform applications</description>
+    <artifactId>quarkus-platform-extension-parent</artifactId>
+    <name>Quarkus Platform - Extension - Parent</name>
+    <description>Parent POM providing dependency and plugin management for Quarkus Platform extensions</description>
     <packaging>pom</packaging>
 
     <dependencyManagement>
@@ -20,7 +20,7 @@
 
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-platform-bom</artifactId>
+                <artifactId>quarkus-platform-deployment-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -36,39 +36,27 @@
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
                     <version>${version.quarkus}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
                     <version>${version.quarkus}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>extension-descriptor</goal>
+                            </goals>
+                            <phase>compile</phase>
+                            <configuration>
+                                <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}
+                                </deployment>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <!--
-                <version>${version.quarkus}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                -->
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -148,52 +136,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>native</id>
-            <activation>
-                <property>
-                    <name>native</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.quarkus</groupId>
-                        <artifactId>quarkus-maven-plugin</artifactId>
-                        <version>${version.quarkus}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>native-image</goal>
-                                </goals>
-                                <configuration>
-                                    <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${surefire-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                                <configuration>
-                                    <systemProperties>
-                                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                                    </systemProperties>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 </project>
