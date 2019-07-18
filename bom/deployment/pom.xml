@@ -30,7 +30,8 @@
             <!-- Quarkus Core Deployment BOM -->
             <dependency>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-bom-deployment</artifactId>
+<!--                <artifactId>quarkus-bom-deployment</artifactId> -->
+<artifactId>quarkus-build-parent</artifactId>
                 <version>${version.quarkus}</version>
                 <type>pom</type>
                 <scope>import</scope>

@@ -3,11 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
         <version>35</version>
     </parent>
+    -->
 
     <groupId>io.quarkus</groupId>
     <artifactId>quarkus-platform-parent</artifactId>
@@ -34,7 +36,7 @@
         <graalvmHome>${env.GRAALVM_HOME}</graalvmHome>
         <postgres.url>jdbc:postgresql:hibernate_orm_test</postgres.url>
 
-        <version.quarkus>999-SNAPSHOT</version.quarkus>
+        <version.quarkus>0.19.1</version.quarkus>
         <version.camel-quarkus>0.0.1-SNAPSHOT</version.camel-quarkus>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <jacoco.version>0.8.3</jacoco.version>
@@ -43,6 +45,8 @@
     <modules>
         <module>bom/runtime</module>
         <module>bom/deployment</module>
+
+        <module>parent/application</module>
 
         <!-- Integration Tests -->
         <module>it</module>
