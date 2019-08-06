@@ -17,7 +17,7 @@
     <properties>
         <test.groupId>org.apache.camel.quarkus</test.groupId>
         <test.artifactId>camel-quarkus-integration-test-jdbc</test.artifactId>
-        <test.version>0.0.1-SNAPSHOT</test.version>
+        <test.version>${version.camel-quarkus}</test.version>
     </properties>
 
     <build>

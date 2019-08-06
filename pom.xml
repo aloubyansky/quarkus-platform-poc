@@ -36,8 +36,8 @@
         <graalvmHome>${env.GRAALVM_HOME}</graalvmHome>
         <postgres.url>jdbc:postgresql:hibernate_orm_test</postgres.url>
 
-        <version.quarkus>999-SNAPSHOT</version.quarkus>
-        <version.camel-quarkus>0.0.1-SNAPSHOT</version.camel-quarkus>
+        <version.quarkus>0.20.0</version.quarkus>
+        <version.camel-quarkus>0.0.2</version.camel-quarkus>
 
         <flatten-plugin.version>1.1.0</flatten-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
